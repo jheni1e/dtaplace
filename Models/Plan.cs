@@ -1,4 +1,4 @@
-namespace dtaplace;
+namespace dtaplace.Models;
 
 public class Plan
 {

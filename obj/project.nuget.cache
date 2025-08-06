@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "qOuAQww/7cQ=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace.csproj",
+=======
   "dgSpecHash": "Lk1uXqUoxT8=",
   "success": true,
   "projectFilePath": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace\\dtaplace.csproj",
+>>>>>>> 65afa0675764325bc8c8e6fb34e8f43c2c90c3b9
   "expectedPackageFiles": [
     "C:\\Users\\disrct\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\disrct\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

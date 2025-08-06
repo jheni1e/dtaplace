@@ -1,4 +1,4 @@
-namespace dtaplace;
+namespace dtaplace.Models;
 
 public class User
 {
@@ -8,6 +8,7 @@ public class User
     public string Password { get; set; }
     public string Bio { get; set; }
     public string ImageURL { get; set; }
+    public int PlanID { get; set; }
     
     Plan Plan { get; set; }
 }
