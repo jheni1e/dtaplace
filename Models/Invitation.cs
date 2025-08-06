@@ -6,6 +6,7 @@ public class Invitation
     public string Description { get; set; }
     public int ReceiverID { get; set; }
     public int RoomID { get; set; }
-    User Receiver { get; set; }
-    Room Room { get; set; }
+    
+    public User Receiver { get; set; }
+    public Room Room { get; set; }
 }

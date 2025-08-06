@@ -9,6 +9,8 @@ public class User
     public string Bio { get; set; }
     public string ImageURL { get; set; }
     public int PlanID { get; set; }
-    
-    Plan Plan { get; set; }
+    public DateTime Expiration { get; set; }
+
+    public Plan Plan { get; set; }
+    public ICollection<Room> Rooms { get; set; } = [];
 }

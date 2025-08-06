@@ -7,5 +7,5 @@ public class GiftCard
     public int PlanID { get; set; }
     public int Duration { get; set; }
 
-    Plan Plan { get; set; }
+    public Plan Plan { get; set; }
 }
