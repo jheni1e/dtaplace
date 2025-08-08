@@ -9,6 +9,7 @@
 //Get Rooms
 //Set Roles
 //Get Roles
+//Delete Room User
 
 //INVITATIONS
 //Send Invitation
@@ -21,4 +22,7 @@
 
 //PAINT 
 //Paint Pixel
+//GetPixels
+
+
 
