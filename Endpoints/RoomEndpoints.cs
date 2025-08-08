@@ -46,6 +46,15 @@ public static class RoomEndpoints
             return Results.BadRequest(result.Reason);
         });
 
+        app.MapGet("invitations", ([FromServices] GetInvitationsUseCase useCase) =>
+        {
+            var result = await useCase.Do();
+            if (result.IsSuccess)
+                return Results.Ok();
+
+            return Results.BadRequest(result.Reason);
+        });
+
         app.MapPost("invite/{username}", (
             string username,
             [FromServices] SendInvitationUseCase useCase) =>
