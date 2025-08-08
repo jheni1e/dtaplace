@@ -11,20 +11,40 @@ public class DTAPlaceDbContext(DbContextOptions opts) : DbContext(opts)
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<Pixel> Pixels => Set<Pixel>();
     public DbSet<GiftCard> GiftCards => Set<GiftCard>();
+    public DbSet<UserRoom> UserRooms => Set<UserRoom>();
 
     protected override void OnModelCreating(ModelBuilder mb)
     {
         mb.Entity<User>()
-            .HasMany(u => u.Rooms);
+            .HasMany(u => u.UserRooms)
+            .WithOne(ur => ur.User)
+            .OnDelete(DeleteBehavior.NoAction);
 
         mb.Entity<Room>()
-            .HasMany(r => r.Users);
+            .HasMany(r => r.UserRooms)
+            .WithOne(ur => ur.Room)
+            .OnDelete(DeleteBehavior.NoAction);
 
-        mb.Entity<User_Room>();
+        mb.Entity<UserRoom>()
+            .HasOne(ur => ur.Role);
 
         mb.Entity<Invitation>()
             .HasOne(r => r.Receiver)
-            .WithForeignKey(r => r.ReceiverID)
-            .OnDeleteBehavior(DeleteBehavior.NoAction);
+            .WithMany(i => i.Invitations)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        mb.Entity<Plan>()
+            .HasMany(p => p.Users)
+            .WithOne(u => u.Plan)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        mb.Entity<Pixel>()
+            .HasOne(p => p.Room)
+            .WithMany(r => r.Pixels)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        mb.Entity<GiftCard>()
+            .HasOne(g => g.Plan)
+            .WithMany(p => p.GiftCards);
     }
 }

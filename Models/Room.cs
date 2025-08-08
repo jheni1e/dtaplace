@@ -7,6 +7,7 @@ public class Room
     public int Width { get; set; }
     public int Height { get; set; }
 
+    public ICollection<UserRoom> UserRooms { get; set; } = [];
     public ICollection<Pixel> Pixels { get; set; } = [];
     public ICollection<User> Users { get; set; } = [];
 }
