@@ -65,5 +65,16 @@ public static class UserEndpoints
 
             return Results.BadRequest(result.Reason);
         });
+
+        app.MapPost("paint", (
+            [FromBody] PaintPixelPayload payload,
+            [FromServices] PaintPixelUseCase useCase) =>
+        {
+            var result = await useCase.Do(payload);
+            if (result.IsSuccess)
+                return Results.Ok();
+
+            return Results.BadRequest(result.Reason);
+        });
     }
 }
