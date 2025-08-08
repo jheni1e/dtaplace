@@ -10,4 +10,6 @@ public class Room
     public ICollection<UserRoom> UserRooms { get; set; } = [];
     public ICollection<Pixel> Pixels { get; set; } = [];
     public ICollection<User> Users { get; set; } = [];
+    public ICollection<Invitation> Invitations { get; set; } = [];
+
 }

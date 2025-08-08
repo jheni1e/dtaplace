@@ -15,22 +15,29 @@ public class DTAPlaceDbContext(DbContextOptions opts) : DbContext(opts)
 
     protected override void OnModelCreating(ModelBuilder mb)
     {
-        mb.Entity<User>()
-            .HasMany(u => u.UserRooms)
-            .WithOne(ur => ur.User)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        mb.Entity<Room>()
-            .HasMany(r => r.UserRooms)
-            .WithOne(ur => ur.Room)
+        mb.Entity<UserRoom>()
+            .HasOne(ur => ur.User)
+            .WithMany(u => u.UserRooms)
             .OnDelete(DeleteBehavior.NoAction);
 
         mb.Entity<UserRoom>()
-            .HasOne(ur => ur.Role);
+            .HasOne(ur => ur.Room)
+            .WithMany(r => r.UserRooms)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        mb.Entity<UserRoom>()
+            .HasOne(ur => ur.Role)
+            .WithOne(r => r.UserRoom)
+            .OnDelete(DeleteBehavior.NoAction);
 
         mb.Entity<Invitation>()
             .HasOne(r => r.Receiver)
             .WithMany(i => i.Invitations)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        mb.Entity<Invitation>()
+            .HasOne(i => i.Room)
+            .WithMany(r => r.Invitations)
             .OnDelete(DeleteBehavior.NoAction);
 
         mb.Entity<Plan>()
@@ -45,6 +52,7 @@ public class DTAPlaceDbContext(DbContextOptions opts) : DbContext(opts)
 
         mb.Entity<GiftCard>()
             .HasOne(g => g.Plan)
-            .WithMany(p => p.GiftCards);
+            .WithMany(p => p.GiftCards)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
