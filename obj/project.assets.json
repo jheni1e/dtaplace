@@ -4717,11 +4717,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace\\dtaplace.csproj",
+      "projectUniqueName": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace.csproj",
       "projectName": "dtaplace",
-      "projectPath": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace\\dtaplace.csproj",
+      "projectPath": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace.csproj",
       "packagesPath": "C:\\Users\\disrct\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace\\obj\\",
+      "outputPath": "C:\\Users\\disrct\\Desktop\\dtaplace\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\disrct\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4797,5 +4797,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.107/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\disrct\\Desktop\\dtaplace\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
