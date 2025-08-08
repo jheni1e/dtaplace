@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dtaplace")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d87e1b2a73ac8f547bc1a7831f1ba4c7b5825a9f")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6ba58843a45e9562aea9cdeff485bdfac606833")]
+>>>>>>> 391ba57bc06fcaaa2ff1459830715a5b3c8c5f0a
 [assembly: System.Reflection.AssemblyProductAttribute("dtaplace")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dtaplace")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
