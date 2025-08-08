@@ -1,15 +1,14 @@
 //PROFILE
 //Create User
 //Edit User
-//Delete User
 //Get User
-//Search User
+//Login
 
 //ROOMS
 //Create Room
-//Delete Room
 //Get Rooms
 //Set Roles
+//Get Roles
 
 //INVITATIONS
 //Send Invitation
@@ -18,6 +17,7 @@
 
 //PLANS
 //Get Plans
+//Assinar plano
 
 //PAINT 
 //Paint Pixel
