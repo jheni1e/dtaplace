@@ -1,5 +1,3 @@
 namespace dtaplace.UseCases.PaintPixel;
 
-public record PaintPixelResponse(
-
-);
+public record PaintPixelResponse;
