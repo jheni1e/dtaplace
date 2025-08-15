@@ -1,2 +1,4 @@
 namespace dtaplace.UseCases.GetRoles;
-public record GetRolesPayload();
+public record GetRolesPayload(
+    string Rolename
+);
