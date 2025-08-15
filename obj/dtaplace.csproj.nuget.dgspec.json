@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace.csproj": {}
+    "C:\\Users\\disrct\\dtaplace\\dtaplace.csproj": {}
   },
   "projects": {
-    "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace.csproj": {
+    "C:\\Users\\disrct\\dtaplace\\dtaplace.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace.csproj",
+        "projectUniqueName": "C:\\Users\\disrct\\dtaplace\\dtaplace.csproj",
         "projectName": "dtaplace",
-        "projectPath": "C:\\Users\\disrct\\Desktop\\dtaplace\\dtaplace.csproj",
+        "projectPath": "C:\\Users\\disrct\\dtaplace\\dtaplace.csproj",
         "packagesPath": "C:\\Users\\disrct\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\disrct\\Desktop\\dtaplace\\obj\\",
+        "outputPath": "C:\\Users\\disrct\\dtaplace\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\disrct\\AppData\\Roaming\\NuGet\\NuGet.Config"
