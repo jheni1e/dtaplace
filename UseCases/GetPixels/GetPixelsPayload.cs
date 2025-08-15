@@ -7,7 +7,11 @@ public class GetPixelsPayload
     public int PositionX { get; set; }
     [Required]
     public int PositionY { get; set; }
-    
+
     [Required]
-    public string Cor { get; set; }
+    public string R { get; set; }
+    [Required]
+    public string G { get; set; }
+    [Required]
+    public string B { get; set; }
 }
