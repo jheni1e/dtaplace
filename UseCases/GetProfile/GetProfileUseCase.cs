@@ -1,10 +1,10 @@
-namespace dtaplace.UseCases.GetPixels;
+namespace dtaplace.UseCases.GetProfile;
 
-public class GetPixelsUseCase
+public class GetProfileUseCase
 {
-    public async Task<Result<GetPixelsResponse>> Do (GetPixelsPayload payload)
+    public async Task<Result<GetProfileResponse>> Do (GetProfilePayload payload)
     {
-        return Result<GetPixelsResponse>.Success(null);
+        return Result<GetProfileResponse>.Success(null);
     }
 
 }

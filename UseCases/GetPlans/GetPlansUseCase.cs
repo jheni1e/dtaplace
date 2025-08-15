@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 namespace dtaplace.UseCases.Getplans;
 
 public class GetPlansUseCase
@@ -6,5 +7,5 @@ public class GetPlansUseCase
     {
         return Result<GetPlansResponse>.Success(null);
     }
-    
+
 }

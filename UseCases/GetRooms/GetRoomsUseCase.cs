@@ -1,8 +1,9 @@
-public class GetPixelsUseCase
+namespace dtaplace.UseCases.GetRooms;
+public class GetRoomsUseCase
 {
-    public async Task<Result<GetPixelsResponse>> Do (GetPixelsPayload payload)
+    public async Task<Result<GetRoomsResponse>> Do(GetRoomsPayload payload)
     {
-        return Result<GetPixelsResponse>.Success(null);
+        return Result<GetRoomsResponse>.Success(null);
     }
 
 }
