@@ -1,6 +1,3 @@
 namespace dtaplace.UseCases.SetRoles;
 
-public class SetRolesUseCase
-{
-    
-}
+public record SetRolesResponse;

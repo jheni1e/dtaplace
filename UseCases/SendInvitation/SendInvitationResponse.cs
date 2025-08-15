@@ -1,6 +1,5 @@
 namespace dtaplace.UseCases.SendInvitation;
 
-public class SendInvitationUseCase
-{
+public record SendInvitationResponse(
 
-}
+);
