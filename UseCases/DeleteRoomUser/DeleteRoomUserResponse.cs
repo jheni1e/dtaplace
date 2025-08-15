@@ -1,3 +1,3 @@
 namespace dtaplace.UseCases.DeleteRoomUser;
 
-public record DeleteRoomUserResponse();
+public record DeleteRoomUserResponse;

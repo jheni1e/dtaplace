@@ -1,3 +1,3 @@
 namespace dtaplace.UseCases.CreateProfile;
 
-public record CreateProfileResponse();
+public record CreateProfileResponse;

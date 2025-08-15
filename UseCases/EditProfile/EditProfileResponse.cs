@@ -1,3 +1,3 @@
 namespace dtaplace.UseCases.EditProfile;
 
-public record EditProfileResponse();
+public record EditProfileResponse;
