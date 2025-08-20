@@ -1,2 +1,6 @@
+using dtaplace.Models;
+
 namespace dtaplace.UseCases.GetRooms;
-public record GetRoomsResponse;
+public record GetRoomsResponse (
+    ICollection<Room> Rooms
+);

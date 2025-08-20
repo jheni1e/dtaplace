@@ -1,5 +1,8 @@
 using Azure;
+using dtaplace.Models;
 
 namespace dtaplace.UseCases.Getplans;
 
-public record GetPlansResponse;
+public record GetPlansResponse (
+    ICollection<Plan> Plans
+);
