@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dtaplace")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b983ae98fb83f9aeae58dc6b243905912b0b1a59")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b6b81749025017876e6a901bd2660c752fc2862")]
 [assembly: System.Reflection.AssemblyProductAttribute("dtaplace")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dtaplace")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
