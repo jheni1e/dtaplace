@@ -1,3 +1,7 @@
+using dtaplace.Models;
+
 namespace dtaplace.UseCases.GetRoles;
 
-public record GetRolesResponse;
+public record GetRolesResponse (
+    ICollection<Role> Roles
+);
