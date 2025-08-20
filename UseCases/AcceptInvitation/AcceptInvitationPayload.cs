@@ -10,7 +10,4 @@ public record AcceptiInvitationPayload
 
     [Required]
     string UserID { get; set; }
-    
-
-
 }

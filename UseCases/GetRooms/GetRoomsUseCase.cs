@@ -5,5 +5,4 @@ public class GetRoomsUseCase
     {
         return Result<GetRoomsResponse>.Success(null);
     }
-
 }

@@ -1,4 +1,5 @@
 namespace dtaplace.UseCases.GetRoles;
 public record GetRolesPayload(
-    string Rolename
+    int RoomID,
+    int UserID
 );

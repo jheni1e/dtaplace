@@ -12,5 +12,4 @@ public record CreateRoomPayload
 
     [Required]
     public int Height { get; set; }
-
 }

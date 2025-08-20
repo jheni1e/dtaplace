@@ -1,2 +1,2 @@
 namespace dtaplace.UseCases.GetRooms;
-public record GetRoomsResponse();
+public record GetRoomsResponse;
