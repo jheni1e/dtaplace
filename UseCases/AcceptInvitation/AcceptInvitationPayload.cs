@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace dtaplace.UseCases.AcceptInvitation;
 
 public record AcceptiInvitationPayload
-{
-    [Required]
-    string RequestID { get; set; }
-
-    [Required]
-    string UserID { get; set; }
-}
+(
+    string UserID,
+    string RequestID
+);
+    
