@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace dtaplace.UseCases.AcceptInvitation;
 
-public record AcceptiInvitationPayload
+public record AcceptInvitationPayload
 (
     string UserID,
     string RequestID
 );
-    

@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 namespace dtaplace.UseCases.Getplans;
 
 public class GetPlansUseCase

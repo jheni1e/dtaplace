@@ -6,5 +6,4 @@ public class GetPixelsUseCase
     {
         return Result<GetPixelsResponse>.Success(null);
     }
-
 }

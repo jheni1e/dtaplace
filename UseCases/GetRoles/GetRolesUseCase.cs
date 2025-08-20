@@ -5,5 +5,4 @@ public class GetRolesUseCase
     {
         return Result<GetRolesResponse>.Success(null);
     }
-
 }

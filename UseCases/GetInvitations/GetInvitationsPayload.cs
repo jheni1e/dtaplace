@@ -1,5 +1,5 @@
 namespace dtaplace.UseCases.GetInvitations;
 
-public record GetInvitationPayload (
+public record GetInvitationsPayload (
     string Username
 );

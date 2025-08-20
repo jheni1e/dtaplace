@@ -29,5 +29,4 @@ public record CreateProfilePayload
     public string Bio { get; init; }
 
     public string ImageURL { get; init; }
-
 }
