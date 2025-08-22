@@ -15,14 +15,14 @@ public class EditProfileUseCase (
         if (payload.Password != user.Password)
             return Result<EditProfileResponse>.Fail("Senha incorreta.");
 
-        if (payload.Bio is not null)
-            user.Bio = payload.Bio;
-        if (payload.Email is not null)
-            user.Email = payload.Email;
-        if (payload.ImageURL is not null)
-            user.ImageURL = payload.ImageURL;
-        if (payload.Username is not null)
-            user.Username = payload.Username;
+        // if (payload.Bio is not null)
+        //     user.Bio = payload.Bio;
+        // a mesma coisa que o código abaixo
+
+        user.Bio = payload.Bio ?? user.Bio;
+        user.Email = payload.Email ?? user.Email;
+        user.ImageURL = payload.ImageURL ?? user.ImageURL;
+        user.Username = payload.Username ?? user.Username;
 
         return Result<EditProfileResponse>.Success(null);
     }
