@@ -4,7 +4,7 @@ using dtaplace.Services.Rooms;
 
 namespace dtaplace.UseCases.CreateRoom;
 
-public class CreateProfileUseCase(
+public class CreateRoomUseCase(
     IRoomService roomService
 )
 {

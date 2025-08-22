@@ -1,15 +1,57 @@
 using System.Text;
+using dtaplace.Models;
 using dtaplace.Services.JWT;
 using dtaplace.Services.Password;
 using dtaplace.Services.Profiles;
+using dtaplace.UseCases.AcceptInvitation;
+using dtaplace.UseCases.CreateProfile;
+using dtaplace.UseCases.CreateRoom;
+using dtaplace.UseCases.DeleteRoomUser;
+using dtaplace.UseCases.EditProfile;
+using dtaplace.UseCases.GetInvitations;
+using dtaplace.UseCases.GetPixels;
+using dtaplace.UseCases.Getplans;
+using dtaplace.UseCases.GetProfile;
+using dtaplace.UseCases.GetRoles;
+using dtaplace.UseCases.GetRooms;
+using dtaplace.UseCases.Login;
+using dtaplace.UseCases.PaintPixel;
+using dtaplace.UseCases.SendInvitation;
+using dtaplace.UseCases.SetRoles;
+using dtaplace.UseCases.SignUpPlan;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<DTAPlaceDbContext>(
+    opts => opts.UseSqlServer(
+        Environment.GetEnvironmentVariable("SQL_CONNECTION")
+    //$env:SQL_CONNECTION = "Data Source=localhost; Initial Catalog=dtaplace; Trust Server Certificate=true; Integrated Security=true"
+    )
+);
+
 builder.Services.AddTransient<IPasswordService, PBKDF2Service>();
 builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddSingleton<IJWTService, JWTService>();
+
+builder.Services.AddTransient<AcceptInvitationUseCase>();
+builder.Services.AddTransient<CreateProfileUseCase>();
+builder.Services.AddTransient<CreateRoomUseCase>();
+builder.Services.AddTransient<DeleteRoomUserUseCase>();
+builder.Services.AddTransient<EditProfileUseCase>();
+builder.Services.AddTransient<GetInvitationsUseCase>();
+builder.Services.AddTransient<GetPixelsUseCase>();
+builder.Services.AddTransient<GetPlansUseCase>();
+builder.Services.AddTransient<GetProfileUseCase>();
+builder.Services.AddTransient<GetRolesUseCase>();
+builder.Services.AddTransient<GetRoomsUseCase>();
+builder.Services.AddTransient<LoginUseCase>();
+builder.Services.AddTransient<PaintPixelUseCase>();
+builder.Services.AddTransient<SendInvitationUseCase>();
+builder.Services.AddTransient<SetRolesUseCase>();
+builder.Services.AddTransient<SignUpPlanUseCase>();
 
 var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
 var keyBytes = Encoding.UTF8.GetBytes(jwtSecret);
@@ -40,5 +82,10 @@ var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.ConfigureAuthEndpoints();
+app.ConfigureRoomEndpoints();
+app.ConfigureInvitationsEndpoints();
+app.ConfigureProfileEndpoints();
 
 app.Run();
