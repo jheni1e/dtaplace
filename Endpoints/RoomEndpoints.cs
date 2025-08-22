@@ -46,27 +46,6 @@ public static class RoomEndpoints
             return Results.BadRequest(result.Reason);
         });
 
-        app.MapGet("invitations", ([FromServices] GetInvitationsUseCase useCase) =>
-        {
-            var result = await useCase.Do();
-            if (result.IsSuccess)
-                return Results.Ok();
-
-            return Results.BadRequest(result.Reason);
-        });
-
-        app.MapPost("invite/{username}", (
-            string username,
-            [FromServices] SendInvitationUseCase useCase) =>
-        {
-            var payload = new SendInvitationPayload(username);
-            var result = await useCase.Do(payload);
-            if (result.IsSuccess)
-                return Results.Ok();
-
-            return Results.BadRequest(result.Reason);
-        });
-
         app.MapDelete("delete/{username}", (
             string username,
             [FromServices] DeleteRoomUser useCase) =>
