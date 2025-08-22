@@ -23,6 +23,6 @@ public class SendInvitationUseCase(DTAPlaceDbContext ctx)
         receiver.Invitations.Add(invitation);
         await ctx.SaveChangesAsync();
 
-        return Result<SendInvitationResponse>.Success(new());
+        return Result<SendInvitationResponse>.Success(null);
     }
 }
