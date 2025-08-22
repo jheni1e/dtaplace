@@ -4,5 +4,6 @@ namespace dtaplace.Services.Rooms;
 
 public interface IRoomService
 {
-    Task<Room> GetRoom(int ID);
+    Task<int> CreateRoom(Room room);
+    Task<Room> GetRoom(int roomId);
 }

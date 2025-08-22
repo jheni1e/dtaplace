@@ -2,6 +2,7 @@ using System.Text;
 using dtaplace.Services.JWT;
 using dtaplace.Services.Password;
 using dtaplace.Services.Profiles;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
