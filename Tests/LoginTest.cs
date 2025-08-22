@@ -1,4 +1,5 @@
 using Xunit;
+using dtaplace.Services.Password;
 
 namespace dtaplace.Tests;
 
