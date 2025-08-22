@@ -1,8 +1,13 @@
+using dtaplace.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace dtaplace.UseCases.GetRooms;
-public class GetRoomsUseCase
+public class GetRoomsUseCase(DTAPlaceDbContext ctx)
 {
     public async Task<Result<GetRoomsResponse>> Do(GetRoomsPayload payload)
     {
-        return Result<GetRoomsResponse>.Success(null);
+        var rooms = await ctx.Rooms.ToListAsync();
+        
+        return Result<GetRoomsResponse>.Success(new GetRoomsResponse(rooms));
     }
 }

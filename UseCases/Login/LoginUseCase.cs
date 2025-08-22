@@ -1,14 +1,18 @@
+using dtaplace.Services.JWT;
+using dtaplace.Services.Password;
+using dtaplace.Services.Profiles;
+
 namespace dtaplace.UseCases.Login;
 
 public class LoginUseCase(
-    IProfilesService profilesService,
+    IProfileService profilesService,
     IPasswordService passwordService,
     IJWTService jWTService
 )
 {
     public async Task<Result<LoginResponse>> Do(LoginPayload payload)
     {
-        var user = await profilesService.FindByLogin(payload.Login);
+        var user = await profilesService.GetProfile(payload.Login);
         if (user is null)
             return Result<LoginResponse>.Fail("User not found");
 
@@ -21,7 +25,9 @@ public class LoginUseCase(
         var jwt = jWTService.CreateToken(
             new (
             user.ID,
-            user.Username
+            user.Username,
+            user.PlanID,
+            user.Expiration
         ));
         
         return Result<LoginResponse>.Success(new LoginResponse(jwt));

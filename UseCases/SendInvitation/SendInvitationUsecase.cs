@@ -1,9 +1,28 @@
+using dtaplace.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace dtaplace.UseCases.SendInvitation;
 
-public class SendInvitationUseCase
+public class SendInvitationUseCase(DTAPlaceDbContext ctx)
 {
     public async Task<Result<SendInvitationResponse>> Do(SendInvitationPayload payload)
     {
-        return Result<SendInvitationResponse>.Success(null);
+        var receiver = await ctx.Users.Include(u => u.Invitations).FirstOrDefaultAsync(u => u.ID == payload.ReceiverID);
+
+        if (receiver is null)
+            Result<SendInvitationResponse>.Fail("Usuário não encontrado.");
+
+        var invitation = new Invitation
+        {
+            ReceiverID = payload.ReceiverID,
+            RoomID = payload.RoomID
+        };
+
+        ctx.Invitations.Add(invitation);
+
+        receiver.Invitations.Add(invitation);
+        await ctx.SaveChangesAsync();
+
+        return Result<SendInvitationResponse>.Success(new());
     }
 }
