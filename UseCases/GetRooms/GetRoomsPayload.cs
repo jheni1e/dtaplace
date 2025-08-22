@@ -1,4 +1,4 @@
 namespace dtaplace.UseCases.GetRooms;
-public record GetRoomsPayload(
+public record GetRoomsPayload (
     int ID
 );

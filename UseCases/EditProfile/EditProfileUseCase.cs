@@ -4,9 +4,7 @@ using dtaplace.Services.Profiles;
 using Microsoft.EntityFrameworkCore;
 namespace dtaplace.UseCases.EditProfile;
 
-public class EditProfileUseCase (
-    IProfileService profileService
-)
+public class EditProfileUseCase (IProfileService profileService)
 {
     public async Task<Result<EditProfileResponse>> Do(EditProfilePayload payload)
     {

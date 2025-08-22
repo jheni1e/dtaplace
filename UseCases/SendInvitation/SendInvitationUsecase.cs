@@ -10,7 +10,7 @@ public class SendInvitationUseCase(DTAPlaceDbContext ctx)
         var receiver = await ctx.Users.Include(u => u.Invitations).FirstOrDefaultAsync(u => u.ID == payload.ReceiverID);
 
         if (receiver is null)
-            Result<SendInvitationResponse>.Fail("Usuário não encontrado.");
+            return Result<SendInvitationResponse>.Fail("Usuário não encontrado.");
 
         var invitation = new Invitation
         {

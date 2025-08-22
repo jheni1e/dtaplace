@@ -1,6 +1,6 @@
 namespace dtaplace.UseCases.SetRoles;
 
-public record SetRolesPayload(
+public record SetRolesPayload (
     int UserID,
     int RoomID,
     int RoleID
