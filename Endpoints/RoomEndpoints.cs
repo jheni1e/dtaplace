@@ -34,9 +34,7 @@ public static class RoomEndpoints
             return Results.BadRequest(result.Reason);
         });
 
-        app.MapGet("roles", async(
-            
-            [FromServices] GetRolesUseCase useCase) =>
+        app.MapGet("roles", async([FromServices] GetRolesUseCase useCase) =>
         {
             var result = await useCase.Do(null);
             if (result.IsSuccess)
@@ -45,7 +43,7 @@ public static class RoomEndpoints
             return Results.BadRequest(result.Reason);
         });
 
-        _ = app.MapPost("set/role", async (
+        app.MapPost("set/role", async (
             [FromBody] SetRolesPayload payload,
             [FromServices] SetRolesUseCase useCase) =>
         {
@@ -56,8 +54,8 @@ public static class RoomEndpoints
             return Results.BadRequest(result.Reason);
         });
 
-        _ = app.MapDelete("delete/{payload.UserID}", async (
-            [FromBody]DeleteRoomUserPayload payload,
+        app.MapDelete("delete/{payload.UserID}", async (
+            [FromBody] DeleteRoomUserPayload payload,
             [FromServices] DeleteRoomUserUseCase useCase) =>
         {
             var result = await useCase.Do(payload);
