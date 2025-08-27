@@ -1,4 +1,5 @@
 using System.Text;
+using dtaplace.Endpoints;
 using dtaplace.Models;
 using dtaplace.Services.JWT;
 using dtaplace.Services.Password;
@@ -85,7 +86,6 @@ app.UseAuthorization();
 
 app.ConfigureAuthEndpoints();
 app.ConfigureRoomEndpoints();
-app.ConfigureInvitationsEndpoints();
-app.ConfigureProfileEndpoints();
+app.ConfigureUserEndpoints();
 
 app.Run();

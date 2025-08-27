@@ -5,10 +5,13 @@
 
 # dotenv files
 .env
+<<<<<<< HEAD
 obj/
 bin/    
 obj
 
+=======
+>>>>>>> endpoints
 # User-specific files
 *.rsuser
 *.suo
