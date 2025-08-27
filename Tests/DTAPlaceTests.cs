@@ -8,10 +8,11 @@ using dtaplace.Models;
 using dtaplace.UseCases.CreateRoom;
 using dtaplace.Services.Rooms;
 using dtaplace.UseCases.GetRooms;
+using Microsoft.EntityFrameworkCore;
 
 namespace dtaplace.Tests;
 
-public class AuthTest
+public class PasswordProfileTests
 {
     [Theory]
     [InlineData("minhasenhaA", "minhasenhaA", true)]
@@ -55,36 +56,30 @@ public class AuthTest
     }
 }
 
-//     [Fact]
-//     public async Task TestCreateRoom()
-//     {
-//         var roomService = new Mock<IRoomService>();
-//         roomService.Setup(s => s.CreateRoom(It.IsAny<Room>()))
-//             .ReturnsAsync(100);
+public class RoomTests
+{
+    [Fact]
+    public async Task TestCreateRoom()
+    {
+        var roomService = new Mock<IRoomService>();
+        roomService.Setup(s => s.CreateRoom(It.IsAny<Room>()))
+            .ReturnsAsync(100);
 
-//         var useCase = new CreateRoomUseCase(roomService.Object);
+        var useCase = new CreateRoomUseCase(roomService.Object);
 
-//         var result = await useCase.Do(new CreateRoomPayload (
-//             // Name: "Sala Teste",
-//             // Width: 50,
-//             // Height: 50
-//         ));
+        var payload = new CreateRoomPayload
+        {
+            Name = "Sala Teste",
+            Width = 50,
+            Height = 50
+        };
 
-//         Assert.Equal(100, result);
-//     }
+        var result = await useCase.Do(payload);
 
-//     [Fact]
-//     public async Task TestGetRoom()
-//     {
-//         var roomService = new Mock<IRoomService>();
-//         roomService.Setup(s => s.GetRoom(42))
-//             .ReturnsAsync(new Room { ID = 42, Name = "Sala Teste" });
+        Assert.True(result.IsSuccess);
 
-//         var useCase = new GetRoomsUseCase(roomService.Object);
-
-//         var result = await useCase.Do(new GetRoomsPayload(42));
-
-//         Assert.NotNull(result);
-//         Assert.Equal("Sala Teste", result!.Name);
-//     }
-// }
+        roomService.Verify(s => s.CreateRoom(It.Is<Room>(
+            r => r.Name == "Sala Teste" && r.Width == 50 && r.Height == 50
+        )), Times.Once);
+    }
+}
