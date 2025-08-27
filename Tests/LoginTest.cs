@@ -3,6 +3,7 @@ using dtaplace.Services.Password;
 using Moq;
 using dtaplace.Services.Profiles;
 using dtaplace.Services.JWT;
+using dtaplace.UseCases.Login;
 
 namespace dtaplace.Tests;
 
@@ -26,10 +27,12 @@ public class AuthTest
     public async Task TestProfile()
     {
         var profileService = new Mock<IProfileService>();
-
-        var user = await profileService.GetProfile(payload.Login);
-        if (user is null)
-            return Result<LoginResponse>.Fail("User not found");
+        profileService.Setup(s => s.GetProfile("lele"))
+            .ReturnsAsync(new Models.User
+            {
+                Username = "lele",
+                Password = "hash_da_senha"
+            });
 
         var passwordService = new Mock<IPasswordService>();
         passwordService.Setup(s => s.Compare(payload.Password, user.Password)))
