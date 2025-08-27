@@ -12,7 +12,7 @@ public class RoomService(DTAPlaceDbContext ctx) : IRoomService
         return room.ID;
     }
 
-    public Task<Room> GetRoom(int roomId)
+    public Task<Room?> GetRoom(int roomId)
     {
         return ctx.Rooms.Where(r => r.ID == roomId).FirstOrDefaultAsync();
     }

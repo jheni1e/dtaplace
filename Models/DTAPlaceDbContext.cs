@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dtaplace.Models;
 
-public class DTAPlaceDbContext(DbContextOptions opts) : DbContext(opts)
+public class DTAPlaceDbContext(DbContextOptions<DTAPlaceDbContext> opts) : DbContext(opts)
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Room> Rooms => Set<Room>();

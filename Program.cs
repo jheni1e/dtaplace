@@ -4,6 +4,7 @@ using dtaplace.Models;
 using dtaplace.Services.JWT;
 using dtaplace.Services.Password;
 using dtaplace.Services.Profiles;
+using dtaplace.Services.Rooms;
 using dtaplace.UseCases.AcceptInvitation;
 using dtaplace.UseCases.CreateProfile;
 using dtaplace.UseCases.CreateRoom;
@@ -26,15 +27,15 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<DTAPlaceDbContext>(
-    opts => opts.UseSqlServer(
-        Environment.GetEnvironmentVariable("SQL_CONNECTION")
-    //$env:SQL_CONNECTION = "Data Source=localhost; Initial Catalog=dtaplace; Trust Server Certificate=true; Integrated Security=true"
-    )
-);
+builder.Services.AddDbContext<DTAPlaceDbContext>(options => {
+    var sqlConn = Environment.GetEnvironmentVariable("SQL_CONNECTION");
+    options.UseSqlServer(sqlConn);
+});
 
+//$env:SQL_CONNECTION = "Data Source=localhost; Initial Catalog=dtaplace; Trust Server Certificate=true; Integrated Security=true"
 builder.Services.AddTransient<IPasswordService, PBKDF2Service>();
 builder.Services.AddTransient<IProfileService, ProfileService>();
+builder.Services.AddTransient<IRoomService, RoomService>();
 builder.Services.AddSingleton<IJWTService, JWTService>();
 
 builder.Services.AddTransient<AcceptInvitationUseCase>();
@@ -57,6 +58,8 @@ builder.Services.AddTransient<SignUpPlanUseCase>();
 var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
 var keyBytes = Encoding.UTF8.GetBytes(jwtSecret);
 var key = new SymmetricSecurityKey(keyBytes);
+
+builder.Services.AddSingleton<SecurityKey>(key);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -86,10 +89,6 @@ app.UseAuthorization();
 
 app.ConfigureAuthEndpoints();
 app.ConfigureRoomEndpoints();
-<<<<<<< HEAD
-=======
-app.ConfigureInvitationsEndpoints();
->>>>>>> 75e1efe8f8c8161301faa6ec73b45d0c839229e4
 app.ConfigureUserEndpoints();
 
 app.Run();

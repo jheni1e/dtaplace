@@ -1,7 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using dtaplace.Models;
 using dtaplace.Services.Profiles;
-using Microsoft.EntityFrameworkCore;
 namespace dtaplace.UseCases.EditProfile;
 
 public class EditProfileUseCase (IProfileService profileService)
