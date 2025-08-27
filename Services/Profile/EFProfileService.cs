@@ -12,9 +12,9 @@ public class ProfileService(DTAPlaceDbContext ctx) : IProfileService
         return user.ID;
     }
 
-    public Task<User> GetProfile(string login)
+    public async Task<User?> GetProfile(string login)
     {
-        return ctx.Users.FirstOrDefaultAsync(
+        return await ctx.Users.FirstOrDefaultAsync(
             p => p.Username == login || p.Email == login
         );
     }
