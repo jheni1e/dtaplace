@@ -16,5 +16,10 @@ public class SetRolesUseCase(DTAPlaceDbContext ctx)
         await ctx.SaveChangesAsync();
 
         return Result<SetRolesResponse>.Success(null);
+
+        //Donos e Administradores podem mudar permissões de outros usuários, isso é mudar entre Dono, Administrador, Pintor ou Plateia.
+        // Contudo, eles não podem nunca prover a algo acima de seu cargo nem afetar alguém com um cargo igual ou superior.
+        // Ou seja, um Dono não pode transformar outro Dono em Plateia.
+        // Um Administrador não pode promover alguém a Dono ou reduzir o nível de outro Administrador.
     }
 }
