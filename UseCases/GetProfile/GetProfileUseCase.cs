@@ -3,9 +3,7 @@ using dtaplace.Services.Profiles;
 
 namespace dtaplace.UseCases.GetProfile;
 
-public class GetProfileUseCase (
-    IProfileService profileService
-)
+public class GetProfileUseCase(IProfileService profileService)
 {
     public async Task<Result<GetProfileResponse>> Do(GetProfilePayload payload)
     {
@@ -20,7 +18,7 @@ public class GetProfileUseCase (
             profile.ImageURL,
             profile.PlanID
         );
-        
+
         //retorna todos os dados exceto email e senha, incluso o plano
         return Result<GetProfileResponse>.Success(response);
     }

@@ -6,7 +6,7 @@ public record Result<T>(
     string Reason
 )
 {
-    public static Result<T> Success(T data)
+    public static Result<T> Success(T? data)
         => new(data, true, null);
 
     public static Result<T> Fail(string reason)

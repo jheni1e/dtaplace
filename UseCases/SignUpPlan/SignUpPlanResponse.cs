@@ -1,5 +1,5 @@
 namespace dtaplace.UseCases.SignUpPlan;
 
-public record SignUpPlanResponse(
+public record SignUpPlanResponse (
     int Duration
 );

@@ -86,6 +86,10 @@ app.UseAuthorization();
 
 app.ConfigureAuthEndpoints();
 app.ConfigureRoomEndpoints();
+<<<<<<< HEAD
+=======
+app.ConfigureInvitationsEndpoints();
+>>>>>>> 75e1efe8f8c8161301faa6ec73b45d0c839229e4
 app.ConfigureUserEndpoints();
 
 app.Run();

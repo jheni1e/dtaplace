@@ -1,6 +1,6 @@
 namespace dtaplace.UseCases.DeleteRoomUser;
 
-public record DeleteRoomUserPayload(
+public record DeleteRoomUserPayload (
     int UserID,
     int RoomID
 );

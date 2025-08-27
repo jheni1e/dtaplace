@@ -1,5 +1,5 @@
 namespace dtaplace.UseCases.SignUpPlan;
 
-public record SignUpPlanPayload(
+public record SignUpPlanPayload (
     string GiftCardCode
 );

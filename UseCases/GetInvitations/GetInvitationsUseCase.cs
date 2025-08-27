@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dtaplace.UseCases.GetInvitations;
 
-public class GetInvitationsUseCase (IProfileService profileService)
+public class GetInvitationsUseCase(IProfileService profileService)
 {
     public async Task<Result<GetInvitationsResponse>> Do(GetInvitationsPayload payload)
     {

@@ -4,9 +4,7 @@ using dtaplace.Services.Rooms;
 
 namespace dtaplace.UseCases.CreateRoom;
 
-public class CreateRoomUseCase(
-    IRoomService roomService
-)
+public class CreateRoomUseCase(IRoomService roomService)
 {
     public async Task<Result<CreateRoomResponse>> Do(CreateRoomPayload payload)
     {
