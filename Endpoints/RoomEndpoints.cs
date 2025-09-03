@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using dtaplace.UseCases.CreateRoom;
 using dtaplace.UseCases.DeleteRoomUser;
 using dtaplace.UseCases.GetPixels;
@@ -13,10 +14,16 @@ public static class RoomEndpoints
     public static void ConfigureRoomEndpoints(this WebApplication app)
     {
         app.MapGet("rooms", async (
+            HttpContext http,
             [FromBody] GetRoomsPayload payload,
             [FromServices] GetRoomsUseCase useCase) =>
         {
+            var claim = http.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim is null)
+                return Results.Unauthorized();
+
             var result = await useCase.Do(payload);
+            
             if (result.IsSuccess)
                 return Results.Ok();
 

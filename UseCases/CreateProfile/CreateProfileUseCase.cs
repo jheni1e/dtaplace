@@ -13,6 +13,7 @@ public class CreateProfileUseCase(
     {
         var username = profileService.GetProfile(payload.Username);
         var email = profileService.GetProfile(payload.Email);
+        
         if (username is not null || email is not null)
             return Result<CreateProfileResponse>.Fail("Username or email already in use.");
 
