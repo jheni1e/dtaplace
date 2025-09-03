@@ -12,12 +12,10 @@ public class GetProfileUseCase
     public async Task<Result<GetProfileResponse>> Do(GetProfilePayload payload)
     {
         var profile = await profileService.GetProfile(payload.Username);
-
         if (profile is null)
             return Result<GetProfileResponse>.Fail("User doesn't exist.");
 
         var plan = ctx.Plans.SingleOrDefault(p => p.ID == profile.PlanID);
-
         if (plan is null)
             return Result<GetProfileResponse>.Fail("Plan not found");
 
