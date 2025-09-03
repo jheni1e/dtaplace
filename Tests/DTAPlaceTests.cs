@@ -53,38 +53,37 @@ public class AuthTest
         var result = await useCase.Do(new LoginPayload("lele", "jhenies2"));
         Assert.True(result.IsSuccess);
     }
+
+    [Fact]
+    public async Task TestCreateRoom()
+    {
+        var roomService = new Mock<IRoomService>();
+        roomService.Setup(s => s.CreateRoom(It.IsAny<Room>()))
+            .ReturnsAsync(100);
+
+        var useCase = new CreateRoomUseCase(roomService.Object);
+
+        var result = await useCase.Do(new CreateRoomPayload (
+            Name: "Sala Teste",
+            Width: 50,
+            Height: 50
+        ));
+
+        Assert.Equal(100, result);
+    }
+
+    [Fact]
+    public async Task TestGetRoom()
+    {
+        var roomService = new Mock<IRoomService>();
+        roomService.Setup(s => s.GetRoom(42))
+            .ReturnsAsync(new Room { ID = 42, Name = "Sala Teste" });
+
+        var useCase = new GetRoomsUseCase(roomService.Object);
+
+        var result = await useCase.Do(new GetRoomsPayload(42));
+
+        Assert.NotNull(result);
+        Assert.Equal("Sala Teste", result!.Name);
+    }
 }
-
-//     [Fact]
-//     public async Task TestCreateRoom()
-//     {
-//         var roomService = new Mock<IRoomService>();
-//         roomService.Setup(s => s.CreateRoom(It.IsAny<Room>()))
-//             .ReturnsAsync(100);
-
-//         var useCase = new CreateRoomUseCase(roomService.Object);
-
-//         var result = await useCase.Do(new CreateRoomPayload (
-//             // Name: "Sala Teste",
-//             // Width: 50,
-//             // Height: 50
-//         ));
-
-//         Assert.Equal(100, result);
-//     }
-
-//     [Fact]
-//     public async Task TestGetRoom()
-//     {
-//         var roomService = new Mock<IRoomService>();
-//         roomService.Setup(s => s.GetRoom(42))
-//             .ReturnsAsync(new Room { ID = 42, Name = "Sala Teste" });
-
-//         var useCase = new GetRoomsUseCase(roomService.Object);
-
-//         var result = await useCase.Do(new GetRoomsPayload(42));
-
-//         Assert.NotNull(result);
-//         Assert.Equal("Sala Teste", result!.Name);
-//     }
-// }
