@@ -5,6 +5,7 @@ namespace dtaplace.Endpoints;
 
 using dtaplace.Models;
 using dtaplace.UseCases.CreateProfile;
+using dtaplace.UseCases.EditProfile;
 using dtaplace.UseCases.GetProfile;
 using dtaplace.UseCases.PaintPixel;
 
@@ -38,14 +39,27 @@ public static class UserEndpoints
             return Results.BadRequest(result.Reason);
         });
 
-        // app.MapPost("{room}/paint", async (
-        //     [FromBody] PaintPixelPayload payload,
-        //     [FromServices] PaintPixelUseCase useCase) =>
+        app.MapPost("paint", async (
+            [FromBody] PaintPixelPayload payload,
+            [FromServices] PaintPixelUseCase useCase) =>
+        {
+            var result = await useCase.Do(payload);
+            if (result.IsSuccess)
+                return Results.Ok();
+            return Results.BadRequest();
+        });
 
-        // {
+        app.MapPut("edit", async (
+            [FromBody] EditProfilePayload payload,
+            [FromServices] EditProfileUseCase useCase) =>
 
-        // }
-        // );
+        {
+            var result = await useCase.Do(payload);
+            if (result.IsSuccess)
+                return Results.Ok();
+            return Results.BadRequest();
+        }
+        );
 
         // app.MapPost("profile/create", async (
         //     [FromBody] CreateUserPayload payload,

@@ -47,9 +47,9 @@ public class PaintPixelUseCase(
 
         ctx.Pixels.Add(pixel);
         user.LastPaint = DateTime.Now;
-    
+
         await ctx.SaveChangesAsync();
 
-        return Result<PaintPixelResponse>.Success(null);
+        return Result<PaintPixelResponse>.Success(new());
     }
 }
