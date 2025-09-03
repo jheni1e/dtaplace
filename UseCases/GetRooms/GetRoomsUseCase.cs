@@ -8,6 +8,7 @@ public class GetRoomsUseCase(DTAPlaceDbContext ctx)
     {
         var rooms = await ctx.Rooms
             .Include(r => r.Creator)
+            .Include(r => r.Name)
             .Where(r => r.Users.Any(u => u.ID == payload.UserID))
             .ToListAsync();
 
