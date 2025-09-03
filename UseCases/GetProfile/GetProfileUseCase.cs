@@ -10,7 +10,7 @@ public class GetProfileUseCase(IProfileService profileService)
         var profile = await profileService.GetProfile(payload.Username);
 
         if (profile == null)
-            return Result<GetProfileResponse>.Fail("Usuario não existe");
+            return Result<GetProfileResponse>.Fail("User doesn't exist.");
         
         var response = new GetProfileResponse(
             profile.Username,
@@ -19,8 +19,9 @@ public class GetProfileUseCase(IProfileService profileService)
             profile.PlanID
         );
 
+        //fazer função de getplanname pelo planid
+
         //retorna todos os dados exceto email e senha, incluso o plano
         return Result<GetProfileResponse>.Success(response);
     }
-
 }

@@ -18,6 +18,7 @@ public record CreateProfilePayload
     [NeedNumber]
     [NeedLower]
     [NeedUpper]
+    [NeedSpecial]
     public string Password { get; init; }
 
     [Required]

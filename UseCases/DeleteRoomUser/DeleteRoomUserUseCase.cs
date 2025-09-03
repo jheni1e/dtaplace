@@ -18,5 +18,7 @@ public class DeleteRoomUserUseCase(DTAPlaceDbContext ctx)
         await ctx.SaveChangesAsync();
 
         return Result<DeleteRoomUserResponse>.Success(null);
+
+        //Donos e Administradores podem remover outros usuários. Donos podem remover Administradores, mas não o contrário
     }
 }

@@ -24,5 +24,8 @@ public class SendInvitationUseCase(DTAPlaceDbContext ctx)
         await ctx.SaveChangesAsync();
 
         return Result<SendInvitationResponse>.Success(null);
+
+        // Donos e Administradores podem digitar o nome de um usuário e adicioná-lo na sala.
+        // Convites são enviados e o usuário poderá aceitar ou recusar.
     }
 }

@@ -5,7 +5,7 @@ public class EditProfileUseCase (IProfileService profileService)
 {
     public async Task<Result<EditProfileResponse>> Do(EditProfilePayload payload)
     {
-        var user = await profileService.GetProfile(payload.OldUsername);
+        var user = await profileService.GetProfile(payload.Login);
 
         if (payload.Password != user.Password)
             return Result<EditProfileResponse>.Fail("Senha incorreta.");
