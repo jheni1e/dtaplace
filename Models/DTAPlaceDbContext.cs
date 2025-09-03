@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace dtaplace.Models;
 
@@ -54,5 +55,16 @@ public class DTAPlaceDbContext(DbContextOptions<DTAPlaceDbContext> opts) : DbCon
             .HasOne(g => g.Plan)
             .WithMany(p => p.GiftCards)
             .OnDelete(DeleteBehavior.NoAction);
+    }
+}
+
+public class RPlaceDbContextFactory : IDesignTimeDbContextFactory<DTAPlaceDbContext>
+{
+    public DTAPlaceDbContext CreateDbContext(string[] args)
+    {
+        var options = new DbContextOptionsBuilder<DTAPlaceDbContext>();
+        var sqlConn = Environment.GetEnvironmentVariable("SQL_CONNECTION");
+        options.UseSqlServer(sqlConn);
+        return new DTAPlaceDbContext(options.Options);
     }
 }

@@ -19,6 +19,7 @@ public class GetProfileUseCase(IProfileService profileService)
             profile.PlanID
         );
 
+     
         //fazer função de getplanname pelo planid
 
         //retorna todos os dados exceto email e senha, incluso o plano
