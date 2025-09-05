@@ -12,7 +12,8 @@ public class CreateRoomUseCase(IRoomService roomService)
         {
             Name = payload.Name,
             Width = payload.Width,
-            Height = payload.Height
+            Height = payload.Height,
+            Creator = payload.Creator
         };
 
         await roomService.CreateRoom(room);

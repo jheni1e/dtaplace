@@ -11,9 +11,11 @@ public class EditProfileUseCase
     public async Task<Result<EditProfileResponse>> Do(EditProfilePayload payload)
     {
         var user = await profileService.GetProfile(payload.Login);
+        if (user is null)
+            return Result<EditProfileResponse>.Fail("User not found.");
 
         if (payload.Password != user.Password)
-            return Result<EditProfileResponse>.Fail("Senha incorreta.");
+                return Result<EditProfileResponse>.Fail("Senha incorreta.");
 
         // if (payload.Bio is not null)
         //     user.Bio = payload.Bio;
