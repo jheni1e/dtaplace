@@ -8,11 +8,14 @@ public class CreateRoomUseCase(IRoomService roomService)
 {
     public async Task<Result<CreateRoomResponse>> Do(CreateRoomPayload payload)
     {
+        var limit = 
+        
         var room = new Room
         {
             Name = payload.Name,
             Width = payload.Width,
-            Height = payload.Height
+            Height = payload.Height,
+            Creator = payload.Creator
         };
 
         await roomService.CreateRoom(room);

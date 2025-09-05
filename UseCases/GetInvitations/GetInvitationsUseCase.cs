@@ -13,6 +13,7 @@ public class GetInvitationsUseCase(IProfileService profileService)
             return Result<GetInvitationsResponse>.Fail("Usuário não encontrado!");
 
         var invitations = profile.Invitations;
+        
         if (invitations is null)
             return Result<GetInvitationsResponse>.Fail("Convites não encontrados!");
 
