@@ -7,14 +7,17 @@ public class SendInvitationUseCase(DTAPlaceDbContext ctx)
 {
     public async Task<Result<SendInvitationResponse>> Do(SendInvitationPayload payload)
     {
-        var receiver = await ctx.Users.Include(u => u.Invitations).FirstOrDefaultAsync(u => u.ID == payload.ReceiverID);
+        var receiver = await ctx.Users.Include(u => u.Invitations).FirstOrDefaultAsync(u => u.Username == payload.ReceiverName);
+        var role = await ctx.UserRooms.FirstOrDefaultAsync(r => r.UserID == payload.SenderID);
 
         if (receiver is null)
             return Result<SendInvitationResponse>.Fail("User not found.");
 
+        //verif role 
+        if (role.ID)
         var invitation = new Invitation
         {
-            ReceiverID = payload.ReceiverID,
+            ReceiverID = receiver.ID,
             RoomID = payload.RoomID
         };
 

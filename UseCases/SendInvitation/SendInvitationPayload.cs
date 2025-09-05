@@ -1,6 +1,7 @@
 namespace dtaplace.UseCases.SendInvitation;
 
 public record SendInvitationPayload (
-    int ReceiverID,
+    string ReceiverName,
+    int SenderID,
     int RoomID
 );
