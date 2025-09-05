@@ -5,7 +5,7 @@ namespace dtaplace.UseCases.Getplans;
 
 public class GetPlansUseCase(DTAPlaceDbContext ctx)
 {
-    public async Task<Result<GetPlansResponse>> Do(GetPlansPayload payload)
+    public async Task<Result<GetPlansResponse>> Do(GetPlansPayload? payload)
     {
         var plans = await ctx.Plans.ToListAsync();
         

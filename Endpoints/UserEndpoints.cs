@@ -9,6 +9,7 @@ using dtaplace.UseCases.CreateProfile;
 using dtaplace.UseCases.EditProfile;
 using dtaplace.UseCases.GetProfile;
 using dtaplace.UseCases.PaintPixel;
+using dtaplace.UseCases.SignUpPlan;
 
 public static class UserEndpoints
 {
@@ -74,60 +75,30 @@ public static class UserEndpoints
 
         }).RequireAuthorization();
 
-        // app.MapPost("profile/create", async (
-        //     [FromBody] CreateUserPayload payload,
-        //     [FromServices] CreateUserUseCase useCase) =>
-        // {
-        //     var result = await useCase.Do(payload);
-        //     if (result.IsSuccess)
-        //         return Results.Ok();
 
-        //     return Results.BadRequest(result.Reason);
-        // });
+        app.MapGet("plans", async ([FromServices] GetPlansUseCase useCase) =>
+        {
+            var result = await useCase.Do(null);
 
-        // app.MapPut("profile/edit", async (
-        //     [FromBody] EditUserPayload payload,
-        //     [FromServices] EditUserUseCase useCase) =>
-        // {
-        //     var result = await useCase.Do(payload);
-        //     if (result.IsSuccess)
-        //         return Results.Ok();
+            return (result.IsSuccess, result.Reason) switch
+            {
+                (false, "User not found") => Results.NotFound(),
+                (false, _) => Results.BadRequest(),
+                (true, _) => Results.Ok(result.Data)
+            };
+        });
 
-        //     return Results.BadRequest(result.Reason);
-        // });
+        app.MapPost("subscribe/{payload.Name}", async (
+            [FromBody] SignUpPlanPayload payload,
+            [FromServices] SignUpPlanUseCase useCase) =>
+        {
+            var result = await useCase.Do(payload);
+            if (result.IsSuccess)
+                return Results.Ok();
 
-        // app.MapGet("plans", async ([FromServices] GetPlansUseCase useCase) =>
-        // {
-        //     var result = await useCase.Do();
+            return Results.BadRequest(result.Reason);
+        });
 
-        //     return (result.IsSuccess, result.Reason) switch
-        //     {
-        //         (false, "User not found") => Results.NotFound(),
-        //         (false, _) => Results.BadRequest(),
-        //         (true, _) => Results.Ok(result.Data)
-        //     };
-        // });
 
-        // app.MapPost("subscribe/{payload.Name}", async (
-        //     [FromBody] SubscribePlanPayload payload,
-        //     [FromServices] SubscribePlanUseCase useCase) =>
-        // {
-        //     var result = await useCase.Do(payload);
-        //     if (result.IsSuccess)
-        //         return Results.Ok();
-
-        //     return Results.BadRequest(result.Reason);
-        // });
-
-        // app.MapPost("paint", (
-        //     [FromBody] PaintPixelPayload payload,
-        //     [FromServices] PaintPixelUseCase useCase) =>
-        // {
-        //     var result = await useCase.Do(payload);
-        //     if (result.IsSuccess)
-        //         return Results.Ok();
-
-        //     return Results.BadRequest(result.Reason);
-        // });
     }
 }
