@@ -35,7 +35,6 @@ public static class UserEndpoints
             var result = await useCase.Do(payload);
             if (result.IsSuccess)
                 return Results.Ok();
-
             return Results.BadRequest(result.Reason);
         });
 
