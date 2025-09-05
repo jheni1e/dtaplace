@@ -23,6 +23,7 @@ public class SignUpPlanUseCase(
 
         if (isPlanValid)
         {
+            
             user.Expiration = user.Expiration.Add(TimeSpan.FromDays(giftcard.Duration));
         }
         else
