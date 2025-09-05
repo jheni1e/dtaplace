@@ -15,14 +15,9 @@ public static class UserEndpoints
     public static void ConfigureUserEndpoints(this WebApplication app)
     {
         app.MapGet("profile/{username}", async (
-            HttpContext http,
             string username,
             [FromServices] GetProfileUseCase useCase) =>
         {
-            var claim = http.User.FindFirst(ClaimTypes.NameIdentifier);
-            if (claim is null)
-                return Results.Unauthorized();
-
             var payload = new GetProfilePayload(username);
             var result = await useCase.Do(payload);
 
