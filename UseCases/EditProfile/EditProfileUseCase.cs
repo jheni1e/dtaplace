@@ -1,7 +1,12 @@
+using dtaplace.Models;
 using dtaplace.Services.Profiles;
 namespace dtaplace.UseCases.EditProfile;
 
-public class EditProfileUseCase (IProfileService profileService)
+public class EditProfileUseCase
+(
+    IProfileService profileService,
+    DTAPlaceDbContext ctx
+)
 {
     public async Task<Result<EditProfileResponse>> Do(EditProfilePayload payload)
     {
@@ -21,6 +26,8 @@ public class EditProfileUseCase (IProfileService profileService)
         user.ImageURL = payload.ImageURL ?? user.ImageURL;
         user.Username = payload.Username ?? user.Username;
 
+        await ctx.SaveChangesAsync();
+        
         return Result<EditProfileResponse>.Success(null);
     }
 }

@@ -1,0 +1,11 @@
+1. create profile
+2. edit profile
+3. get invitations
+4. get pixels
+5. get plans
+6. get profile
+7. get roles
+8. get rooms
+9. login
+10. sign up plan
+11. paint pixel
