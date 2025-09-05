@@ -6,7 +6,7 @@ namespace dtaplace.UseCases.SendInvitation;
 
 public class SendInvitationUseCase(
     DTAPlaceDbContext ctx,
-    RolesPlanService rolesPlanService)
+    IRolesPlanService rolesPlanService)
 {
     public async Task<Result<SendInvitationResponse>> Do(SendInvitationPayload payload)
     {
@@ -16,8 +16,8 @@ public class SendInvitationUseCase(
         if (receiver is null)
             return Result<SendInvitationResponse>.Fail("User not found.");
 
-        if (role is not RoomRole.Admin && role is not RoomRole.Dono)
-            return Result<SendInvitationResponse>.Fail("Somente o host e os administradores da sala podem enviar convites");
+        if (!await rolesPlanService.IsAdminOrOwner(payload.SenderID))
+            return Result<SendInvitationResponse>.Fail("Only the room owner and administrators can send invitations!");
 
         var invitation = new Invitation
         {

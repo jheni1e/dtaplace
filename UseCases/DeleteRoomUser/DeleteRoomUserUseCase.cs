@@ -7,18 +7,19 @@ namespace dtaplace.UseCases.DeleteRoomUser;
 
 public class DeleteRoomUserUseCase(
     DTAPlaceDbContext ctx,
-    RolesPlanService rolesPlanService)
+    IRolesPlanService rolesPlanService)
 {
     public async Task<Result<DeleteRoomUserResponse>> Do(DeleteRoomUserPayload payload)
     {
         var room = await ctx.UserRooms.SingleOrDefaultAsync(r => r.ID == payload.RoomID && r.UserID == payload.UserID);
         var role = await rolesPlanService.GetRole(payload.UserID);
 
-        if (role is not RoomRole.Admin || role is not RoomRole.Dono)
-            return Result<DeleteRoomUserResponse>.Fail("Somente o host e os administradores da sala podem deletar usuários!");
+
+        if (!await rolesPlanService.IsAdminOrOwner(payload.RequesterID))
+            return Result<DeleteRoomUserResponse>.Fail("Only the room owner and administrators can remove users from the room!");
             
         if (room is null)
-            return Result<DeleteRoomUserResponse>.Fail("Usuário ou sala não encontrado!");
+            return Result<DeleteRoomUserResponse>.Fail("User / room not found!");
 
         ctx.UserRooms.Remove(room);
         await ctx.SaveChangesAsync();

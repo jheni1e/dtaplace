@@ -1,16 +1,23 @@
 using dtaplace.Models;
+using dtaplace.Services.RolePlanService;
 using Microsoft.EntityFrameworkCore;
 
 namespace dtaplace.UseCases.SetRoles;
 
-public class SetRolesUseCase(DTAPlaceDbContext ctx)
+public class SetRolesUseCase(
+    DTAPlaceDbContext ctx,
+    IRolesPlanService rolesPlanService)
 {
     public async Task<Result<SetRolesResponse>> Do(SetRolesPayload payload)
     {
         var userroom = await ctx.UserRooms.SingleOrDefaultAsync(r => r.RoomID == payload.RoomID && r.UserID == payload.UserID);
- 
+        var role = await rolesPlanService.GetRole(payload.RequesterID);
+
+        if (!await rolesPlanService.IsAdminOrOwner(payload.RequesterID))
+            return Result<SetRolesResponse>.Fail("Only the room creator and administrators can set roles!");
+
         if (userroom is null)
-            return Result<SetRolesResponse>.Fail("UserRoom não encontrado.");
+            return Result<SetRolesResponse>.Fail("UserRoom not find.");
 
         userroom.RoleID = payload.RoleID;
         await ctx.SaveChangesAsync();

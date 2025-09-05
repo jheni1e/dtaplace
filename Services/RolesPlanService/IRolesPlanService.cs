@@ -10,8 +10,17 @@ public enum RoomRole
     Plateia = 1
 }
 
+public enum PlanName
+{
+    Platinum = 2,
+    Gold = 1,
+    Free = 0
+}
+
 public interface IRolesPlanService
 {
     Task<PlanInfo> GetPlan(User user);
     Task<RoomRole> GetRole(int RoleID);
+    Task<bool> IsAdminOrOwner(int RoleID);
+    Task<PlanName> GetPlan(int PlanID);
 }

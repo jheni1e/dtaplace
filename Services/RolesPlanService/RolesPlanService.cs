@@ -29,4 +29,22 @@ public class RolesPlanService(DTAPlaceDbContext ctx) : IRolesPlanService
             _ => RoomRole.Plateia
         };
     }
+
+    public async Task<bool> IsAdminOrOwner(int RoleID)
+    {
+        var role = await GetRole(RoleID);
+        return role == RoomRole.Admin || role == RoomRole.Dono;
+    }
+
+    public async Task<PlanName> GetPlan(int PlanID)
+    {
+        var plan = await ctx.Plans.FindAsync(PlanID);
+
+        return plan.Name switch
+        {
+            "Platinum" => PlanName.Platinum,
+            "Gold" => PlanName.Gold,
+            _ => PlanName.Free
+        };
+    }
 }
