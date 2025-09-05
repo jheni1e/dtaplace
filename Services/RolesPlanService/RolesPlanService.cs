@@ -22,11 +22,11 @@ public class RolesPlanService(DTAPlaceDbContext ctx) : IRolesPlanService
         var role = await ctx.Roles.FindAsync(RoleID);
 
         return role.Rolename switch
-        {
-            "Dono" => RoomRole.Dono,
-            "Admin" => RoomRole.Admin,
-            "Pintor" => RoomRole.Pintor,
-            _ => RoomRole.Plateia
-        };
+            {
+                "Dono" => RoomRole.Dono,
+                "Admin" => RoomRole.Admin,
+                "Pintor" => RoomRole.Pintor,
+                _ => RoomRole.Plateia
+            };
     }
 }
