@@ -2,7 +2,7 @@ using dtaplace.Models;
 
 namespace dtaplace.Services.RolePlanService;
 
-public class RolesPlanService : IRolesPlanService
+public class RolesPlanService(DTAPlaceDbContext ctx) : IRolesPlanService
 {
     public Task<PlanInfo> GetPlan(User user)
     {
@@ -17,8 +17,16 @@ public class RolesPlanService : IRolesPlanService
         return Task.FromResult(planInfo);
     }
 
-    public Task<RoleInfo> GetRole(User user)
+    public async Task<RoomRole> GetRole(int RoleID)
     {
-        throw new NotImplementedException();
+        var role = await ctx.Roles.FindAsync(RoleID);
+
+        return role.Rolename switch
+        {
+            "Dono" => RoomRole.Dono,
+            "Admin" => RoomRole.Admin,
+            "Pintor" => RoomRole.Pintor,
+            _ => RoomRole.Plateia
+        };
     }
 }
