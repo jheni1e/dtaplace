@@ -3,5 +3,5 @@ public record GetProfileResponse (
     string Username,
     string Bio,
     string ImageURL,
-    int PlanID
+    string PlanName
 );

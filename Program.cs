@@ -87,6 +87,9 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.ConfigureAuthEndpoints();
 app.ConfigureRoomEndpoints();
 app.ConfigureUserEndpoints();

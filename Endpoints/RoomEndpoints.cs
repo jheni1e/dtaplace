@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using dtaplace.UseCases.CreateRoom;
 using dtaplace.UseCases.DeleteRoomUser;
 using dtaplace.UseCases.GetPixels;
@@ -13,34 +14,42 @@ public static class RoomEndpoints
     public static void ConfigureRoomEndpoints(this WebApplication app)
     {
         app.MapGet("rooms", async (
+            HttpContext http,
             [FromBody] GetRoomsPayload payload,
             [FromServices] GetRoomsUseCase useCase) =>
         {
-            var result = await useCase.Do(payload);
-            if (result.IsSuccess)
-                return Results.Ok();
+            var claim = http.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim is null)
+                return Results.Unauthorized();
 
-            return Results.BadRequest(result.Reason);
-        });
+            var result = await useCase.Do(payload);
+
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Reason);
+
+            return Results.Ok();
+        }).RequireAuthorization();
 
         app.MapPost("create/room", async (
             [FromBody] CreateRoomPayload payload,
             [FromServices] CreateRoomUseCase useCase) =>
         {
             var result = await useCase.Do(payload);
-            if (result.IsSuccess)
-                return Results.Ok();
 
-            return Results.BadRequest(result.Reason);
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Reason);
+
+            return Results.Ok();
         });
 
         app.MapGet("roles", async([FromServices] GetRolesUseCase useCase) =>
         {
             var result = await useCase.Do(null);
-            if (result.IsSuccess)
-                return Results.Ok();
 
-            return Results.BadRequest(result.Reason);
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Reason);
+
+            return Results.Ok();
         });
 
         app.MapPost("set/role", async (
@@ -48,10 +57,11 @@ public static class RoomEndpoints
             [FromServices] SetRolesUseCase useCase) =>
         {
             var result = await useCase.Do(payload);
-            if (result.IsSuccess)
-                return Results.Ok();
 
-            return Results.BadRequest(result.Reason);
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Reason);
+
+            return Results.Ok();
         });
 
         app.MapDelete("delete/{payload.UserID}", async (
@@ -59,6 +69,7 @@ public static class RoomEndpoints
             [FromServices] DeleteRoomUserUseCase useCase) =>
         {
             var result = await useCase.Do(payload);
+
             return (result.IsSuccess, result.Reason) switch
             {
                 (false, "User not found") => Results.NotFound(),
@@ -72,10 +83,11 @@ public static class RoomEndpoints
             [FromServices] GetPixelsUseCase useCase) =>
         {
             var result = await useCase.Do(payload);
-            if (result.IsSuccess)
-                return Results.Ok();
 
-            return Results.BadRequest(result.Reason);
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Reason);
+
+            return Results.Ok();
         });
     }
 }
