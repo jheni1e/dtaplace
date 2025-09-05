@@ -5,6 +5,11 @@ namespace dtaplace.Services.Profiles;
 
 public class ProfileService(DTAPlaceDbContext ctx) : IProfileService
 {
+    internal static async Task GetProfile()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<int> CreateProfile(User user)
     {
         ctx.Users.Add(user);
