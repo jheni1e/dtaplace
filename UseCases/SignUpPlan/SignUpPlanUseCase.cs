@@ -6,7 +6,7 @@ namespace dtaplace.UseCases.SignUpPlan;
 
 public class SignUpPlanUseCase(
     DTAPlaceDbContext ctx,
-    ProfileService profileService)
+    IProfileService profileService)
 {
     public async Task<Result<SignUpPlanResponse>> Do(SignUpPlanPayload payload)
     {
