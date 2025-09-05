@@ -8,8 +8,6 @@ public class CreateRoomUseCase(IRoomService roomService)
 {
     public async Task<Result<CreateRoomResponse>> Do(CreateRoomPayload payload)
     {
-        var limit = 
-        
         var room = new Room
         {
             Name = payload.Name,
