@@ -19,7 +19,7 @@ public class SignUpPlanUseCase(
             return Result<SignUpPlanResponse>.Fail("Gift Card code is invalid.");
 
         var isPlanValid = user.Expiration > DateTime.Now;
-        var gratuito = ctx.Plans.FirstOrDefault(p => p.ID == 0);
+        var free = ctx.Plans.SingleOrDefault(p => p.ID == 0);
 
         if (isPlanValid)
         {
@@ -27,7 +27,7 @@ public class SignUpPlanUseCase(
         }
         else
         {
-            user.Plan = gratuito;
+            user.Plan = free;
             user.PlanID = 0;
 
             user.Plan = giftcard.Plan;

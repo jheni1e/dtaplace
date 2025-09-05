@@ -14,5 +14,5 @@ public record CreateRoomPayload
     [Required]
     public int Height { get; set; }
     [Required]
-    public User Creator { get; set; }
+    public string CreatorUsername { get; set; }
 }

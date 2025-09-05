@@ -1,19 +1,27 @@
 using dtaplace.Models;
 using dtaplace.Services.Password;
+using dtaplace.Services.Profiles;
 using dtaplace.Services.Rooms;
 
 namespace dtaplace.UseCases.CreateRoom;
 
-public class CreateRoomUseCase(IRoomService roomService)
+public class CreateRoomUseCase(
+    IRoomService roomService,
+    IProfileService profileService
+)
 {
     public async Task<Result<CreateRoomResponse>> Do(CreateRoomPayload payload)
     {
+        var creator = await profileService.GetProfile(payload.CreatorUsername);
+        if (creator is null)
+            return Result<CreateRoomResponse>.Fail("User doesn't exist.");
+
         var room = new Room
         {
             Name = payload.Name,
             Width = payload.Width,
             Height = payload.Height,
-            Creator = payload.Creator
+            Creator = creator
         };
 
         await roomService.CreateRoom(room);
