@@ -17,7 +17,7 @@ public class RolesPlanService : IRolesPlanService
         return Task.FromResult(planInfo);
     }
 
-    public Task<string> GetRole(User user)
+    public Task<RoleInfo> GetRole(User user)
     {
         throw new NotImplementedException();
     }
