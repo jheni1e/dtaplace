@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using dtaplace.Services.Profiles;
 namespace dtaplace.Endpoints;
 
+using System.Security.Claims;
 using dtaplace.Models;
 using dtaplace.UseCases.CreateProfile;
 using dtaplace.UseCases.EditProfile;
@@ -14,9 +15,14 @@ public static class UserEndpoints
     public static void ConfigureUserEndpoints(this WebApplication app)
     {
         app.MapGet("profile/{username}", async (
+            HttpContext http,
             string username,
             [FromServices] GetProfileUseCase useCase) =>
         {
+            var claim = http.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim is null)
+                return Results.Unauthorized();
+
             var payload = new GetProfilePayload(username);
             var result = await useCase.Do(payload);
 
@@ -26,9 +32,9 @@ public static class UserEndpoints
                 (false, _) => Results.BadRequest(),
                 (true, _) => Results.Ok(result.Data)
             };
-        });
+        }).RequireAuthorization();
 
-        app.MapPost("profile/create", async (
+        app.MapPost("create/profile", async (
             [FromBody] CreateProfilePayload payload,
             [FromServices] CreateProfileUseCase useCase) =>
         {
@@ -39,26 +45,39 @@ public static class UserEndpoints
         });
 
         app.MapPost("paint", async (
+            HttpContext http,
             [FromBody] PaintPixelPayload payload,
             [FromServices] PaintPixelUseCase useCase) =>
         {
+            var claim = http.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim is null)
+                return Results.Unauthorized();
+
             var result = await useCase.Do(payload);
             if (result.IsSuccess)
                 return Results.Ok();
             return Results.BadRequest();
-        });
 
-        app.MapPut("edit", async (
+        }).RequireAuthorization();
+
+        app.MapPut("edit/profile", async (
+            HttpContext http,
             [FromBody] EditProfilePayload payload,
             [FromServices] EditProfileUseCase useCase) =>
 
         {
+            //Autenticação do usuário
+            var claim = http.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim is null)
+                return Results.Unauthorized();
+            
+            //Chama o useCase
             var result = await useCase.Do(payload);
             if (result.IsSuccess)
                 return Results.Ok();
             return Results.BadRequest();
-        }
-        );
+
+        }).RequireAuthorization();
 
         // app.MapPost("profile/create", async (
         //     [FromBody] CreateUserPayload payload,
