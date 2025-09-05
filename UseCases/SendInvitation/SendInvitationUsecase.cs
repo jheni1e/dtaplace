@@ -1,20 +1,24 @@
 using dtaplace.Models;
+using dtaplace.Services.RolePlanService;
 using Microsoft.EntityFrameworkCore;
 
 namespace dtaplace.UseCases.SendInvitation;
 
-public class SendInvitationUseCase(DTAPlaceDbContext ctx)
+public class SendInvitationUseCase(
+    DTAPlaceDbContext ctx,
+    RolesPlanService rolesPlanService)
 {
     public async Task<Result<SendInvitationResponse>> Do(SendInvitationPayload payload)
     {
         var receiver = await ctx.Users.Include(u => u.Invitations).FirstOrDefaultAsync(u => u.Username == payload.ReceiverName);
-        var role = await ctx.UserRooms.FirstOrDefaultAsync(r => r.UserID == payload.SenderID);
+        var role = await rolesPlanService.GetRole(payload.SenderID);
 
         if (receiver is null)
             return Result<SendInvitationResponse>.Fail("User not found.");
 
-        //verif role 
-        if (role.ID)
+        if (role is not RoomRole.Admin && role is not RoomRole.Dono)
+            return Result<SendInvitationResponse>.Fail("Somente o host e os administradores da sala podem enviar convites");
+
         var invitation = new Invitation
         {
             ReceiverID = receiver.ID,
