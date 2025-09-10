@@ -1,0 +1,13 @@
+01.Criar modelos
+02.Criar DbContext
+03.Configurar DbContext e conexão com o SQL (variável de ambiente)
+04.Criar e rodar migrations
+05.Definir UseCases
+06.Definir Payloads e Responses dos Payloads
+07.Implementar Endpoints usando UseCases
+08.Configurar UseCases como serviços
+09.Definir Serviços
+10.Implementar UseCases
+11.Definir Testes (opcional kk)
+12.Implementar e Configurar Serviços (Configurar JWT)
+13.Habilitar Swagger
